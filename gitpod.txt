@@ -1,0 +1,23 @@
+cd /workspace
+Wget  https://developer.android.com/studio/#downloads
+Unzip  https://developer.android.com/studio/#downloads
+cd /workspace/cmdline-tools/bin
+sdkmanager --licenses
+
+sudo add-apt-repository ppa:maarten-fonville/android-studio && \
+    sudo apt-get update && \
+    sudo apt-get install android-sdk \
+        lib32stdc++6 \
+        android-studio \
+        android-sdk-build-tools \
+        android-sdk \
+        android-sdk-platform-23 --no-install-recommends --yes \
+        && sudo apt-get clean \
+        && sudo rm -rf /var/lib/apt/lists/* \
+        && cd /workspace/cmdline-tools/bin \
+        && cd ANDROID_SDK_ROOT/ \
+        && sudo cp -r licenses /usr/lib/android-sdk/ \
+        && export ANDROID_SDK_ROOT=/usr/lib/android-sdk/ \
+       && sudo chown -R $(whoami) $ANDROID_SDK_ROOT \
+       && cd /workspace/AndroidPing/ \
+       && ./gradlew build
